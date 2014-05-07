@@ -291,6 +291,14 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
 		requestLayout();
 	}
 	
+    public synchronized void scrollDX(int dx, int duration) {
+        mScroller.startScroll(mNextX, 0, dx, 0, duration);
+        synchronized (HorizontalListView.this) {
+            mNextX += dx;
+        }
+        requestLayout();
+    }
+	
 	@Override
 	public boolean dispatchTouchEvent(MotionEvent ev) {
 		boolean handled = super.dispatchTouchEvent(ev);
